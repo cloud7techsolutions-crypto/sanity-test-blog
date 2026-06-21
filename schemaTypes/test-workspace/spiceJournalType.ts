@@ -33,12 +33,6 @@ export const spiceJournalType = defineType({
       title: 'Published At',
       type: 'date',
     }),
-    // defineField({
-    //   name: 'heroImage',
-    //   title: 'Hero Image URL',
-    //   type: 'url',
-    //   description: 'Main banner image for the article',
-    // }),
     defineField({
         name: 'mainImage',
         title: 'Main image',
@@ -52,36 +46,7 @@ export const spiceJournalType = defineType({
       title: 'Introduction Hook',
       type: 'text',
       description: 'Opening hook paragraph skip site headers, footers and secondary navigations',
-    }),
-    // defineField({
-    //   name: 'contentBlocks',
-    //   title: 'Dynamic Page Builder Blocks',
-    //   type: 'array',
-    //   description: 'Add, edit, remove, and reorder content sections dynamically while authoring.',
-    //   of: [
-    //     // 1. TEXT BLOCK
-    //     defineArrayMember({
-    //       type: 'object',
-    //       name: 'textBlock',
-    //       title: 'Rich Text Section',
-    //       fields: [
-    //         defineField({ name: 'body', title: 'Content Body (Markdown/Text)', type: 'text', validation: (Rule) => Rule.required() }),
-    //       ],
-    //     }),
-        
-    //     // 2. TIP / CALLOUT CARD
-    //     defineArrayMember({
-    //       type: 'object',
-    //       name: 'tipCard',
-    //       title: 'Ayurvedic Tip / Callout Card',
-    //       fields: [
-    //         defineField({ name: 'title', title: 'Callout Title', type: 'string', validation: (Rule) => Rule.required() }),
-    //         defineField({ name: 'accentText', title: 'Category Accent Tag (e.g. TECHNIQUE)', type: 'string' }),
-    //         defineField({ name: 'content', title: 'Main Body Text', type: 'text', validation: (Rule) => Rule.required() }),
-    //       ],
-    //     }),
-    //   ],
-    // }),
+    })
   ],
   preview: {
     select: {
