@@ -15,21 +15,21 @@ const dataset =
 
 export default defineConfig([
   {
-  name: 'test-workspace',
-  title: 'E-Commerce & Blog Studio, Test Studio',
-  projectId,
-  dataset,
-  plugins: [deskTool(), visionTool()],
-  basePath: '/test-workspace',
-  schema: {
-    types: testWorkspaceSchemaTypes,
+    name: 'test-workspace',
+    title: 'E-Commerce & Blog Studio, Test Studio',
+    projectId,
+    dataset,
+    plugins: [deskTool(), visionTool()],
+    basePath: '/test-workspace',
+    schema: {
+      types: testWorkspaceSchemaTypes,
+    },
   },
-},
-{
+  {
     name: 'sarits-pantry-studio-Prod',
     title: 'Sarits\'s pantry Studio -- PRODUCTION',
     projectId,
-    dataset : 'production',
+    dataset: 'production',
     basePath: '/sarits-pantry-studio-prod',
     plugins: [deskTool(), visionTool()],
     schema: { types: pantryschemaTypes },
@@ -38,7 +38,7 @@ export default defineConfig([
     name: 'sarits-pantry-studio-Dev',
     title: 'Sarits\'s pantry Studio -- TEST',
     projectId,
-    dataset : 'development',
+    dataset: 'development',
     basePath: '/sarits-pantry-studio-dev',
     plugins: [deskTool(), visionTool()],
     schema: { types: pantryschemaTypes },
