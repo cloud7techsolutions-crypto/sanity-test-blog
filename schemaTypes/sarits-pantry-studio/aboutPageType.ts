@@ -73,5 +73,23 @@ export const aboutPageType = defineType({
         }),
       ],
     }),
+
+    // --- 💬 ADDED: DYNAMIC LINKED COMMENTS PANEL ---
+    defineField({
+      name: 'incomingComments',
+      title: '💬 Linked Comments For This Page',
+      type: 'string',
+      components: {
+        field: (props) => {
+          // This tells Sanity to explicitly render its built-in cross-reference panel
+          return props.renderDefault({
+            ...props,
+            children: props.renderDefault(props) 
+          })
+        }
+      },
+
+      hidden: true 
+    })
   ],
 })
