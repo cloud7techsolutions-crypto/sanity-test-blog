@@ -29,64 +29,101 @@ export const spiceJournalType = defineType({
       initialValue: 'Sarita Roy',
     }),
     defineField({
+      name: 'badge',
+      title: 'Badge Text',
+      type: 'string',
+      initialValue: 'HEALTH',
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published At',
       type: 'date',
     }),
-    // defineField({
-    //   name: 'heroImage',
-    //   title: 'Hero Image URL',
-    //   type: 'url',
-    //   description: 'Main banner image for the article',
-    // }),
     defineField({
-        name: 'mainImage',
-        title: 'Main image',
-        type: 'image',
-        options: {
-          hotspot: true,
-        },
-      }),
+      name: 'heroImage',
+      title: 'Hero Image URL',
+      type: 'url',
+      description: 'Main banner image for the article',
+    }),
+    defineField({
+      name: 'mainImage',
+      title: 'Main image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
     defineField({
       name: 'introduction',
       title: 'Introduction Hook',
       type: 'text',
       description: 'Opening hook paragraph skip site headers, footers and secondary navigations',
     }),
-    // defineField({
-    //   name: 'contentBlocks',
-    //   title: 'Dynamic Page Builder Blocks',
-    //   type: 'array',
-    //   description: 'Add, edit, remove, and reorder content sections dynamically while authoring.',
-    //   of: [
-    //     // 1. TEXT BLOCK
-    //     defineArrayMember({
-    //       type: 'object',
-    //       name: 'textBlock',
-    //       title: 'Rich Text Section',
-    //       fields: [
-    //         defineField({ name: 'body', title: 'Content Body (Markdown/Text)', type: 'text', validation: (Rule) => Rule.required() }),
-    //       ],
-    //     }),
+    defineField({
+      name: 'contentBlocks',
+      title: 'Dynamic Page Builder Blocks',
+      type: 'array',
+      description: 'Add, edit, remove, and reorder content sections dynamically while authoring.',
+      of: [
+        // Paragraphs Block (Handles arrays of text paragraphs before or after quotes)
+        defineArrayMember({
+          type: 'object',
+          name: 'paragraphsBlock',
+          title: 'Paragraphs Group',
+          fields: [
+            defineField({
+              name: 'paragraphs',
+              title: 'Paragraphs',
+              type: 'array',
+              of: [{ type: 'text' }],
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+        }),
         
-    //     // 2. TIP / CALLOUT CARD
-    //     defineArrayMember({
-    //       type: 'object',
-    //       name: 'tipCard',
-    //       title: 'Ayurvedic Tip / Callout Card',
-    //       fields: [
-    //         defineField({ name: 'title', title: 'Callout Title', type: 'string', validation: (Rule) => Rule.required() }),
-    //         defineField({ name: 'accentText', title: 'Category Accent Tag (e.g. TECHNIQUE)', type: 'string' }),
-    //         defineField({ name: 'content', title: 'Main Body Text', type: 'text', validation: (Rule) => Rule.required() }),
-    //       ],
-    //     }),
-    //   ],
-    // }),
+        // Quote Block (Explicitly handles the italic callout quote)
+        defineArrayMember({
+          type: 'object',
+          name: 'quoteBlock',
+          title: 'Italic Quote Callout',
+          fields: [
+            defineField({ 
+              name: 'text', 
+              title: 'Quote Text', 
+              type: 'text', 
+              validation: (Rule) => Rule.required() 
+            }),
+          ],
+        }),
+
+        // original generic text block
+        defineArrayMember({
+          type: 'object',
+          name: 'textBlock',
+          title: 'Rich Text Section',
+          fields: [
+            defineField({ name: 'body', title: 'Content Body (Markdown/Text)', type: 'text', validation: (Rule) => Rule.required() }),
+          ],
+        }),
+        
+        // original tip / callout card
+        defineArrayMember({
+          type: 'object',
+          name: 'tipCard',
+          title: 'Ayurvedic Tip / Callout Card',
+          fields: [
+            defineField({ name: 'title', title: 'Callout Title', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'accentText', title: 'Category Accent Tag (e.g. TECHNIQUE)', type: 'string' }),
+            defineField({ name: 'content', title: 'Main Body Text', type: 'text', validation: (Rule) => Rule.required() }),
+          ],
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
+      author: 'author',
       media: 'mainImage',
     },
     prepare(selection) {

@@ -17,17 +17,21 @@ const dataset =
 
 
 const sharedStructureWithComments: StructureResolver = (S, context) =>
-  S.defaults()?.views([
-    S.view.form(), // Default Form View
-    S.view
-      .component(DocumentsPane)
-      .options({
-        query: `*[_type == "comment" && target._ref == $id]`,
-        params: { id: '_id' },
-        options: { perspective: 'previewDrafts' }
-      })
-      .title('Linked Comments')
-  ])
+  S.defaults()?.child((documentId) =>
+    S.document()
+      .documentId(documentId)
+      .views([
+        S.view.form(), // Default Form View
+        S.view
+          .component(DocumentsPane)
+          .options({
+            query: `*[_type == "comment" && target._ref == $id]`,
+            params: { id: documentId },
+            options: { perspective: 'previewDrafts' }
+          })
+          .title('Linked Comments')
+      ])
+  )
 
 export default defineConfig([
   {
