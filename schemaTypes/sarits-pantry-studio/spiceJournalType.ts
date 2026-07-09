@@ -66,35 +66,35 @@ export const spiceJournalType = defineType({
       description: 'Add, edit, remove, and reorder content sections dynamically while authoring.',
       of: [
         // Paragraphs Block (Handles arrays of text paragraphs before or after quotes)
-        defineArrayMember({
-          type: 'object',
-          name: 'paragraphsBlock',
-          title: 'Paragraphs Group',
-          fields: [
-            defineField({
-              name: 'paragraphs',
-              title: 'Paragraphs',
-              type: 'array',
-              of: [{ type: 'text' }],
-              validation: (Rule) => Rule.required(),
-            }),
-          ],
-        }),
+        // defineArrayMember({
+        //   type: 'object',
+        //   name: 'paragraphsBlock',
+        //   title: 'Paragraphs Group',
+        //   fields: [
+        //     defineField({
+        //       name: 'paragraphs',
+        //       title: 'Paragraphs',
+        //       type: 'array',
+        //       of: [{ type: 'text' }],
+        //       validation: (Rule) => Rule.required(),
+        //     }),
+        //   ],
+        // }),
         
         // Quote Block (Explicitly handles the italic callout quote)
-        defineArrayMember({
-          type: 'object',
-          name: 'quoteBlock',
-          title: 'Italic Quote Callout',
-          fields: [
-            defineField({ 
-              name: 'text', 
-              title: 'Quote Text', 
-              type: 'text', 
-              validation: (Rule) => Rule.required() 
-            }),
-          ],
-        }),
+        // defineArrayMember({
+        //   type: 'object',
+        //   name: 'quoteBlock',
+        //   title: 'Italic Quote Callout',
+        //   fields: [
+        //     defineField({ 
+        //       name: 'text', 
+        //       title: 'Quote Text', 
+        //       type: 'text', 
+        //       validation: (Rule) => Rule.required() 
+        //     }),
+        //   ],
+        // }),
 
         // original generic text block
         defineArrayMember({
@@ -110,10 +110,9 @@ export const spiceJournalType = defineType({
         defineArrayMember({
           type: 'object',
           name: 'tipCard',
-          title: 'Ayurvedic Tip / Callout Card',
+          title: 'Tip / Callout Card',
           fields: [
             defineField({ name: 'title', title: 'Callout Title', type: 'string', validation: (Rule) => Rule.required() }),
-            defineField({ name: 'accentText', title: 'Category Accent Tag (e.g. TECHNIQUE)', type: 'string' }),
             defineField({ name: 'content', title: 'Main Body Text', type: 'text', validation: (Rule) => Rule.required() }),
           ],
         }),

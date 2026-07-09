@@ -6,18 +6,6 @@ export const productType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'id',
-      title: 'Product ID (Slug-like key)',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'name',
-      title: 'Product Display Name (Internal)',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'title',
       title: 'Product Title',
       type: 'string',
@@ -30,6 +18,18 @@ export const productType = defineType({
         source: 'title',
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'id',
+      title: 'Product ID (Slug-like key)',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'name',
+      title: 'Product Display Name (Internal)',
+      type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -76,13 +76,19 @@ export const productType = defineType({
     defineField({
       name: 'image',
       title: 'Product Main Image URL',
-      type: 'url',
+      type: 'image',
+      options: { hotspot: true },
     }),
     defineField({
       name: 'images',
       title: 'Product Gallery Images',
       type: 'array',
-      of: [defineArrayMember({ type: 'url' })],
+      of: [
+        defineArrayMember({
+          type: 'image',
+          options: { hotspot: true },
+        }),
+      ],
     }),
     defineField({
       name: 'imageCart',
@@ -163,4 +169,17 @@ export const productType = defineType({
       of: [defineArrayMember({ type: 'string' })],
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      author: 'author',
+      media: 'mainImage', // Restored root path since fields are flat again
+    },
+    prepare(selection) {
+      const { author } = selection
+      return Object.assign({}, selection, {
+        subtitle: author && `by ${author}`,
+      })
+    },
+  },
 })
