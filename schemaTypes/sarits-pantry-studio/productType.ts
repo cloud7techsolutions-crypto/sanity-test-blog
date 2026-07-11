@@ -34,7 +34,7 @@ export const productType = defineType({
     }),
     defineField({
       name: 'href',
-      title: 'Product Href Path',
+      title: 'Product Href Path -- (/products/[Slug -Name] -- Eg: /products/butter-chicken-masala)',
       type: 'string',
     }),
     defineField({
@@ -75,13 +75,13 @@ export const productType = defineType({
     }),
     defineField({
       name: 'image',
-      title: 'Product Main Image URL',
+      title: 'Product Main Image -- Image diplayed Hopepage and products page',
       type: 'image',
       options: { hotspot: true },
     }),
     defineField({
       name: 'images',
-      title: 'Product Gallery Images',
+      title: 'Product Gallery Images -- Images displayed on product details page',
       type: 'array',
       of: [
         defineArrayMember({
@@ -92,8 +92,9 @@ export const productType = defineType({
     }),
     defineField({
       name: 'imageCart',
-      title: 'Cart Thumbnail Image URL',
-      type: 'url',
+      title: 'Cart Thumbnail Image URL -- Image displayed in the cart',
+      type: 'image',
+      options: { hotspot: true },
     }),
     defineField({
       name: 'bgColor',
