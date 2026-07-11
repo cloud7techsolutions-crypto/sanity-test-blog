@@ -35,6 +35,27 @@ export const spiceJournalType = defineType({
       initialValue: 'HEALTH',
     }),
     defineField({
+      name: 'articleBadge',
+      title: 'Article Type / Promotion',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'None', value: 'none' },
+          { title: 'Featured', value: 'featured' },
+          { title: 'Popular', value: 'popular' },
+          { title: 'Editor\'s Choice', value: 'editors_choice' },
+        ],
+        layout: 'dropdown', // Enforces a clean dropdown menu UI
+      },
+      initialValue: 'none', // Sets 'None' as the default choice
+    }),
+    
+    defineField({
+      name: 'href',
+      title: 'Page Href Path  -- (/journal/[Slug -Name] -- Eg: /journal/power-of-indian-spices)',
+      type: 'string',
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published At',
       type: 'date',
@@ -53,6 +74,13 @@ export const spiceJournalType = defineType({
         hotspot: true,
       },
     }),
+    
+    defineField({
+      name: 'readMore',
+      title: 'Read More CTA Text',
+      type: 'string',
+      initialValue: 'Read More',
+    }),
     defineField({
       name: 'introduction',
       title: 'Introduction Hook',
@@ -65,38 +93,6 @@ export const spiceJournalType = defineType({
       type: 'array',
       description: 'Add, edit, remove, and reorder content sections dynamically while authoring.',
       of: [
-        // Paragraphs Block (Handles arrays of text paragraphs before or after quotes)
-        // defineArrayMember({
-        //   type: 'object',
-        //   name: 'paragraphsBlock',
-        //   title: 'Paragraphs Group',
-        //   fields: [
-        //     defineField({
-        //       name: 'paragraphs',
-        //       title: 'Paragraphs',
-        //       type: 'array',
-        //       of: [{ type: 'text' }],
-        //       validation: (Rule) => Rule.required(),
-        //     }),
-        //   ],
-        // }),
-        
-        // Quote Block (Explicitly handles the italic callout quote)
-        // defineArrayMember({
-        //   type: 'object',
-        //   name: 'quoteBlock',
-        //   title: 'Italic Quote Callout',
-        //   fields: [
-        //     defineField({ 
-        //       name: 'text', 
-        //       title: 'Quote Text', 
-        //       type: 'text', 
-        //       validation: (Rule) => Rule.required() 
-        //     }),
-        //   ],
-        // }),
-
-        // original generic text block
         defineArrayMember({
           type: 'object',
           name: 'textBlock',
@@ -105,8 +101,6 @@ export const spiceJournalType = defineType({
             defineField({ name: 'body', title: 'Content Body (Markdown/Text)', type: 'text', validation: (Rule) => Rule.required() }),
           ],
         }),
-        
-        // original tip / callout card
         defineArrayMember({
           type: 'object',
           name: 'tipCard',
