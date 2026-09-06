@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export const commentSchema = defineType({
   name: 'comment',
-  title: 'Comment',
+  title: 'Feedback',
   type: 'document',
   fields: [
     defineField({
@@ -41,10 +41,25 @@ export const commentSchema = defineType({
         { type: 'Journal' }
       ],
       options: {
-        // We update the filter to check for any of these allowed types
         filter: '_type in ["product", "aboutPageContent", "homePageContent", "Journal"]',
       }
-    })
+    }),
+    defineField({
+      name: 'source',
+      type: 'string',
+      title: 'Feedback Source',
+      description: 'Where did the user hear about us?',
+      options: {
+        list: [
+          { title: 'Instagram', value: 'instagram' },
+          { title: 'Facebook', value: 'facebook' },
+          { title: 'website review', value: 'website' },
+          { title: 'Others', value: 'others' },
+        ],
+        layout: 'dropdown', // Optional: Ensures it's displayed as a dropdown
+      },
+      validation: (Rule) => Rule.required(),
+    }),
   ],
   preview: {
     select: {
