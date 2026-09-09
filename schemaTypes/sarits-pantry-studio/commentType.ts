@@ -31,6 +31,14 @@ export const commentSchema = defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'rating',
+      type: 'number',
+      title: 'Rating',
+      description: 'Customer rating from 1 to 5.',
+      initialValue: 5,
+      validation: (Rule) => Rule.required().min(1).max(5),
+    }),
+    defineField({
       name: 'targetPage',
       title: 'Target Page',
       type: 'reference',
@@ -49,6 +57,7 @@ export const commentSchema = defineType({
       type: 'string',
       title: 'Feedback Source',
       description: 'Where did the user hear about us?',
+      initialValue: 'website',
       options: {
         list: [
           { title: 'Instagram', value: 'instagram' },
@@ -56,7 +65,7 @@ export const commentSchema = defineType({
           { title: 'website review', value: 'website' },
           { title: 'Others', value: 'others' },
         ],
-        layout: 'dropdown', // Optional: Ensures it's displayed as a dropdown
+        layout: 'dropdown',
       },
       validation: (Rule) => Rule.required(),
     }),
